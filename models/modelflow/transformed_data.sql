@@ -5,7 +5,7 @@ WITH btc_data AS (
         LAG(high) OVER (ORDER BY timestamp) AS lag,
         AVG(high) OVER (ORDER BY timestamp ROWS BETWEEN 6 PRECEDING AND 1 PRECEDING) AS moving_avg,
         "BTC-USD" as trading_pair
-    FROM  {{ ref('btc') }}
+    FROM  {{ ref('bitcoin_prices') }}
 ),
 xau_data AS (
     SELECT
@@ -14,7 +14,7 @@ xau_data AS (
         LAG(high) OVER (ORDER BY timestamp) AS lag,
         AVG(high) OVER (ORDER BY timestamp ROWS BETWEEN 6 PRECEDING AND 1 PRECEDING) AS moving_avg,
         "XAU-USD" as trading_pair
-    FROM  {{ ref('xau') }}
+    FROM  {{ ref('gold_prices') }}
 )
 
 SELECT * FROM btc_data
